@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks/useRedux';
-import { CartState } from '../../state/cartReducer';
+import { useAppSelector } from '../../lib/hooks/useRedux';
+import { CartState } from '../../lib/state/cartReducer';
 import {
   CartTable,
 } from './CartElements';

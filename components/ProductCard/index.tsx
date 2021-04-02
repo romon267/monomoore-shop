@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Product } from '.prisma/client';
-import { useAppDispatch } from '../../hooks/useRedux';
-import { addToCart as addToCartAction } from '../../state/cartReducer';
+import { useAppDispatch } from '../../lib/hooks/useRedux';
+import { addToCart as addToCartAction } from '../../lib/state/cartReducer';
 import {
   Container,
   WrapperT,

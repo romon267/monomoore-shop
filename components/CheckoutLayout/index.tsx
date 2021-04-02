@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import orderService from '../../services/orders';
-import orderItemService from '../../services/orderItems';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import orderService from '../../lib/services/orders';
+import orderItemService from '../../lib/services/orderItems';
+import { useAppDispatch, useAppSelector } from '../../lib/hooks/useRedux';
 import {
   addToCart, removeFromCart, CartState, clearCart, CartProduct,
-} from '../../state/cartReducer';
+} from '../../lib/state/cartReducer';
 import {
   CheckoutWrapper,
   Header,
@@ -26,7 +26,7 @@ import {
   CheckoutBtn,
   Notification,
 } from './CheckoutElements';
-import { flashNotification } from '../../state/notificationReducer';
+import { flashNotification } from '../../lib/state/notificationReducer';
 
 const CheckoutLayout = (): JSX.Element => {
   const cart = useAppSelector((state) => state.cart as CartState);
@@ -81,24 +81,28 @@ const CheckoutLayout = (): JSX.Element => {
         paid: false,
         complete: false,
       };
-      const createdOrder = await orderService.createNew(newOrder);
-      const items = cart.products;
-      const promisedResults = items.map(async (i) => orderItemService.createNew({
-        orderId: createdOrder.id,
-        productId: i.id,
-        quantity: i.quantity,
-      }));
-      const savedResults = await Promise.all(promisedResults);
-      console.log('SAVED ALL TO DB');
-      console.log(savedResults, createdOrder);
-      dispatch(clearCart());
-      clearForm();
-      // @ts-expect-error cannot reslove react-redux typings right now
-      // due to lack of experience with typescript
-      // this is thunk action
-      dispatch(flashNotification('success', 'Заказ сделан успешно, проверьте почту!', 10));
-    } else {
-      console.log('order not placing');
+      try {
+        const createdOrder = await orderService.createNew(newOrder);
+        const items = cart.products;
+        const promisedResults = items.map(async (i) => orderItemService.createNew({
+          orderId: createdOrder.id,
+          productId: i.id,
+          quantity: i.quantity,
+        }));
+        const savedResults = await Promise.all(promisedResults);
+        console.log('SAVED ALL TO DB');
+        console.log(savedResults, createdOrder);
+        dispatch(clearCart());
+        clearForm();
+        // @ts-expect-error cannot reslove react-redux typings right now
+        // due to lack of experience with typescript
+        // this is thunk action
+        dispatch(flashNotification('success', 'Заказ сделан успешно, проверьте почту!', 10));
+      } catch (error) {
+        // @ts-expect-error thunk
+        dispatch(flashNotification('error', 'Ошибка при оформлении заказа!', 5));
+        console.log('Error during creating an order', error);
+      }
     }
   };
 

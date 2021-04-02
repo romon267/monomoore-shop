@@ -8,8 +8,8 @@ import {
   ButtonWrapper,
   Checkout,
 } from './CartElements';
-import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { clearCart } from '../../state/cartReducer';
+import { useAppDispatch, useAppSelector } from '../../lib/hooks/useRedux';
+import { clearCart } from '../../lib/state/cartReducer';
 
 const Cart = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
