@@ -33,10 +33,10 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
   return (
     <Container>
       <WrapperT>
+        <Img src={product.imgUrl} width={300} height={200} quality={100} alt="product image" />
         <Link href={`/shop/product/${product.id}`}>
           <Title>{product.title}</Title>
         </Link>
-        <Img src={product.imgUrl} width={600} height={1000} alt="product image" />
         <Description>{product.shortDescription}</Description>
       </WrapperT>
       <WrapperB>

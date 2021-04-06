@@ -141,6 +141,16 @@ export const ItemName = styled.div`
   text-align: left;
 `;
 
+export const ItemLink = styled.a`
+  text-decoration:none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    color: #c7c7c7;
+  }
+`;
+
 export const ItemDesc = styled.div`
   max-width: 220px;
   text-align: left;

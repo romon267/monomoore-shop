@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import orderService from '../../lib/services/orders';
@@ -25,6 +26,7 @@ import {
   ItemTextWrap,
   CheckoutBtn,
   Notification,
+  ItemLink,
 } from './CheckoutElements';
 import { flashNotification } from '../../lib/state/notificationReducer';
 
@@ -172,7 +174,11 @@ const CheckoutLayout = (): JSX.Element => {
             <CartItem key={p.id}>
               <ItemTextWrap>
                 <ItemName>
-                  {p.title}
+                  <Link href={`/shop/product/${p.id}`}>
+                    <ItemLink>
+                      {p.title}
+                    </ItemLink>
+                  </Link>
                   {' '}
                   x
                   {' '}

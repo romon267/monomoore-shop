@@ -13,6 +13,9 @@ export const CartButton = styled.button`
   cursor: pointer;
   transition: 0.2s all ease-in-out;
   outline: none;
+  color: #fff;
+  margin-top: 6px;
+  font-weight: bold;
 
   &:hover {
     border-bottom: 2px solid gray;

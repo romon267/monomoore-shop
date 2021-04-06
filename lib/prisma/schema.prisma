@@ -20,6 +20,7 @@ model Product {
   updatedAt        DateTime    @updatedAt @map(name: "updated_at")
   OrderItem        OrderItem[]
   imgUrl           String      @default("/shop/default.png")
+  detailImages     String[]
   digital          Boolean     @default(false)
   deleted          Boolean     @default(false)
 }

@@ -8,7 +8,7 @@ export const ShopContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: #010606;
   
   @media screen and (max-width: 768px) {
     padding: 50px 0;
@@ -35,7 +35,7 @@ export const ShopWrapper = styled.div`
 
 export const ShopHeader = styled.h1`
   font-size: 2.5rem;
-  color: #010606;
+  color: #fff;
   margin-bottom: 64px;
 
   @media screen and (max-width: 480px) {
